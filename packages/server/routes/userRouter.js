@@ -4,22 +4,18 @@ const { userController } = require('../controllers');
 const userRouter = Router();
 
 // /api/users
-userRouter.get('/', userController.getUsers);
+userRouter
+  .route('/')
+  .get(userController.getUsers)
+  .post(userController.createUser);
 
 // /api/users/:userId
-userRouter.get('/:userId', userController.getUserById);
-
-// /api/users
-userRouter.post('/', userController.createUser);
-
-// /api/users/:userId
-userRouter.patch('/:userId', userController.updateUser);
-
-// /api/users/:userId
-userRouter.put('/:userId', userController.updateUser);
-
-// /api/users/:userId
-userRouter.delete('/:userId', userController.deleteUser);
+userRouter
+  .route('/:userId')
+  .get(userController.getUserById)
+  .patch(userController.updateUser)
+  .put(userController.updateUser)
+  .delete(userController.deleteUser);
 
 // /api/users/:userId/tasks
 userRouter.get('/:userId/tasks', userController.getUserTasks);
