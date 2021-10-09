@@ -14,7 +14,7 @@ userRouter
   .route('/:userId')
   .get(userController.getUserById)
   .patch(userController.updateUser)
-  .put(userController.updateUser)
+  .put(userController.updateOrCreateUser, userController.createUser)
   .delete(userController.deleteUser);
 
 // /api/users/:userId/tasks
