@@ -10,15 +10,14 @@ function UsersList (props) {
     getUsers();
   }, []);
 
-  const mapUser = ({ id, name, telNumber, isBanned }) => {
+  const mapUser = ({ id, firstName, lastName, email }) => {
     const deleteHandler = () => {
       deleteUser(id);
     };
 
     return (
       <li key={id}>
-        ID: {id} name: {name} tel.: {telNumber}
-        <input type='checkbox' checked={isBanned} />
+        firstName: {firstName} lastName: {lastName} email:{email}
         <button onClick={deleteHandler}>Delete</button>
       </li>
     );

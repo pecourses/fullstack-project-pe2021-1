@@ -7,9 +7,11 @@ function UserForm (props) {
   const { createUser } = props;
 
   const initialUserValues = {
-    name: '',
-    telNumber: '',
-    isBanned: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    passwordHash: '',
+    // isBanned: false,
   };
   const submitHandler = (values, formikBag) => {
     createUser(values);
@@ -21,8 +23,14 @@ function UserForm (props) {
       {formikProps => {
         return (
           <Form>
-            <Field name='name' />
-            <Field name='telNumber' />
+            <Field name='firstName' />
+            <br />
+            <Field name='lastName' />
+            <br />
+            <Field name='email' />
+            <br />
+            <Field name='passwordHash' />
+            <br />
             <button type='submit'>Add</button>
           </Form>
         );
