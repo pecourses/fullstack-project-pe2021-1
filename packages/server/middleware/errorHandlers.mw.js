@@ -1,12 +1,14 @@
-const { BaseError } = require('sequelize/types');
+// const { BaseError } = require('sequelize/types');
 
 module.exports.validationErrorHandler = (err, req, res, next) => {
   //
+  next(err);
 };
 
 module.exports.sequelizeErrorHandler = (err, req, res, next) => {
-  if (err instanceof BaseError) {
-  }
+  // if (err instanceof BaseError) {
+  //}
+  next(err);
 };
 
 module.exports.errorHandler = (err, req, res, next) => {
@@ -16,5 +18,5 @@ module.exports.errorHandler = (err, req, res, next) => {
   }
   res
     .status(err?.status ?? 500)
-    .sent({ errors: [{ title: err?.message ?? 'Internal server error' }] });
+    .send({ errors: [{ title: err?.message ?? 'Internal server error' }] });
 };

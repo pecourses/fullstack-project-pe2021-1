@@ -54,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
           isBefore: DataTypes.NOW,
         },
       },
+      image: { type: DataTypes.STRING },
     },
     {
       sequelize,

@@ -157,6 +157,36 @@ module.exports.deleteUser = async (req, res) => {
   // }
 };
 
+module.exports.changeImage = async (req, res, next) => {
+  const {
+    file: { filename },
+    params: { userId },
+  } = req;
+  try {
+    const [updatedUserCount, [updatedUser]] = await User.update(
+      { image: filename },
+      {
+        where: { id: userId },
+        returning: true,
+      }
+    );
+
+    if (updatedUserCount > 0) {
+      const preparedUser = _.omit(updatedUser.get(), [
+        'id',
+        'createdAt',
+        'updatedAt',
+        'passwordHash',
+      ]);
+      return res.status(200).send({ data: preparedUser });
+    }
+
+    next(createError(404, 'User Not Found'));
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports.getUserTasks = async (req, res) => {
   console.log(`getUserTasks`);
 };
