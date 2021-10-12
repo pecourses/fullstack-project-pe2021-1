@@ -6,7 +6,7 @@ const router = require('./router');
 const app = express();
 
 // прием запросов только с определенного хоста
-app.use(cors({ origin: 'http://localhost' }));
+app.use(cors());
 
 app.use(express.json());
 
