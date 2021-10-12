@@ -72,11 +72,11 @@ function usersSagaReducer (state = initialState, action) {
       };
     }
     case ACTION_TYPES.DELETE_USER_SUCCESS: {
-      const { deletedUser } = action;
+      const { id } = action;
       const { users } = state;
       const newUsers = [...users];
       newUsers.splice(
-        newUsers.findIndex(u => u.id === deletedUser.id),
+        newUsers.findIndex(u => u.id === id),
         1
       );
       return {
