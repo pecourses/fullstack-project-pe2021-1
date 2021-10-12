@@ -19,10 +19,13 @@ export function * getUsersSaga () {
 
   try {
     //   юзеры = загрузка()
-    const { data: users } = yield API.getUsers();
+    const {
+      data: { data: users },
+    } = yield API.getUsers();
     //   отправить экшн  ACTION_TYPES.GET_USERS_SUCCESS
 
     yield put(getUsersSuccess(users));
+
     // yield put({
     //   type: ACTION_TYPES.GET_USERS_SUCCESS,
     //   users: users,
@@ -38,7 +41,9 @@ export function * createUserSaga (action) {
 
   yield put(createUserRequest());
   try {
-    const { data: newUser } = yield API.createUser(user);
+    const {
+      data: { data: newUser },
+    } = yield API.createUser(user);
     yield put(createUserSuccess(newUser));
   } catch (e) {
     yield put(createUserError(e));
@@ -49,8 +54,8 @@ export function * deleteUserSaga (action) {
   const { id } = action;
   yield put(deleteUserRequest());
   try {
-    const { data: deletedUser } = yield API.deleteUser(id);
-    yield put(deleteUserSuccess(deletedUser));
+    yield API.deleteUser(id);
+    yield put(deleteUserSuccess(id));
   } catch (e) {
     yield put(deleteUserError(e));
   }
