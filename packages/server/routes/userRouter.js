@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { userController } = require('../controllers');
-const { upload, paginate } = require('../middleware');
+const { upload, paginate, validate } = require('../middleware');
 
 const userRouter = Router();
 
@@ -8,14 +8,18 @@ const userRouter = Router();
 userRouter
   .route('/')
   .get(paginate.paginateUsers, userController.getUsers)
-  .post(userController.createUser);
+  .post(validate.validateNewUser, userController.createUser);
 
 // /api/users/:userId
 userRouter
   .route('/:userId')
   .get(userController.getUserById)
-  .patch(userController.updateUser)
-  .put(userController.updateOrCreateUser, userController.createUser)
+  .patch(validate.validateUpdatedUser, userController.updateUser)
+  .put(
+    validate.validateNewUser,
+    userController.updateOrCreateUser,
+    userController.createUser
+  )
   .delete(userController.deleteUser);
 
 // /api/users/:userId/images
